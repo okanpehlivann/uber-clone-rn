@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import navReducer from './slices/navSlice';
+import navReducer from '../slices/navSlice';
 
 export const store = configureStore({
   reducer: {

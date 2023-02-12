@@ -10,15 +10,25 @@ import React, {FC} from 'react';
 import {TNavOptionProps, TNavOptionsData} from '../interfaces/NavOptionsData';
 import tw from 'tailwind-react-native-classnames';
 import {Icon} from 'react-native-elements';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+export type RootStackParamList = {
+  YourScreen: {id: number} | undefined;
+};
 
 const NavOptions: FC<TNavOptionProps> = props => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
     <FlatList
       data={props.navOptionsData}
       horizontal
       keyExtractor={(item: TNavOptionsData) => item.id}
       renderItem={({item}: ListRenderItemInfo<TNavOptionsData>) => (
-        <TouchableOpacity style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(item?.screen)}
+          style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}>
           <View>
             <Image
               style={{width: 120, height: 120, resizeMode: 'contain'}}

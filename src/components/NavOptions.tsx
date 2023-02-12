@@ -12,6 +12,9 @@ import tw from 'tailwind-react-native-classnames';
 import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {TSetOrigin} from '../interfaces/NavInitialState';
+import {selectOrigin} from '../redux/slices/navSlice';
+import {useAppSelector} from '../redux/store/store';
 
 export type RootStackParamList = {
   YourScreen: {id: number} | undefined;
@@ -19,6 +22,7 @@ export type RootStackParamList = {
 
 const NavOptions: FC<TNavOptionProps> = props => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const origin: TSetOrigin = useAppSelector(selectOrigin);
 
   return (
     <FlatList
@@ -28,8 +32,9 @@ const NavOptions: FC<TNavOptionProps> = props => {
       renderItem={({item}: ListRenderItemInfo<TNavOptionsData>) => (
         <TouchableOpacity
           onPress={() => navigation.navigate(item?.screen)}
+          disabled={!origin}
           style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}>
-          <View>
+          <View style={tw`${origin ? '' : 'opacitiy-20'}`}>
             <Image
               style={{width: 120, height: 120, resizeMode: 'contain'}}
               source={{uri: item.image}}

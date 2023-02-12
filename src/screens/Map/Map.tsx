@@ -16,7 +16,6 @@ const Map: FC = props => {
       </View>
       <View style={tw`h-1/2`}>
         <Stack.Navigator>
-          // 2.18
           <Stack.Screen
             name="NavigateCard"
             component={NavigateCard}

@@ -1,5 +1,9 @@
 import {PayloadAction} from '@reduxjs/toolkit';
-import {InitialState, TSetLocation} from '../../interfaces/NavInitialState';
+import {
+  InitialState,
+  TSetLocation,
+  TSetTravel,
+} from '../../interfaces/NavInitialState';
 
 export const navSliceReducers = {
   setOrigin: (state: InitialState, action: PayloadAction<TSetLocation>) => {
@@ -10,7 +14,10 @@ export const navSliceReducers = {
     state.destination = action.payload;
   },
 
-  setTravelTimeInformation(state: InitialState, action: PayloadAction<any>) {
+  setTravelTimeInformation(
+    state: InitialState,
+    action: PayloadAction<TSetTravel>,
+  ) {
     state.travelTimeInformation = action.payload;
   },
 };

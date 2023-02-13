@@ -13,6 +13,9 @@ import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {TRideOptionsData} from '../interfaces/RideOptions';
+import {TSetTravel} from '../interfaces/NavInitialState';
+import {useAppSelector} from '../redux/store/store';
+import {selectTravelTimeInformation} from '../redux/slices/navSlice';
 
 export const rideOptionData: TRideOptionsData[] = [
   {
@@ -37,9 +40,14 @@ export const rideOptionData: TRideOptionsData[] = [
   },
 ];
 
+const SURGE_CHARGE_RATE: number = 1.5;
+
 const RideOptionsCard: FC = props => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [selected, setSelected] = useState<TRideOptionsData | null>(null);
+  const travelTimeInformation: TSetTravel = useAppSelector(
+    selectTravelTimeInformation,
+  );
 
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
@@ -49,7 +57,9 @@ const RideOptionsCard: FC = props => {
           style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}>
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
-        <Text style={tw`text-center py-5 text-xl`}>Select a Ride</Text>
+        <Text style={tw`text-center py-5 text-xl`}>
+          Select a Ride - {travelTimeInformation?.distance.text}
+        </Text>
       </View>
 
       <FlatList
@@ -72,14 +82,24 @@ const RideOptionsCard: FC = props => {
 
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold mt-2`}>{item.title}</Text>
-              <Text>Travel Time...</Text>
+              <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
             </View>
-            <Text style={tw`text-xl`}>$99</Text>
+            <Text style={tw`text-xl`}>
+              {new Intl.NumberFormat('en-gb', {
+                style: 'currency',
+                currency: 'GBP',
+              }).format(
+                (Number(travelTimeInformation?.duration.value) *
+                  SURGE_CHARGE_RATE *
+                  item.multiplier) /
+                  100,
+              )}
+            </Text>
           </TouchableOpacity>
         )}
       />
 
-      <View>
+      <View style={tw`mt-auto border-t border-gray-200`}>
         <TouchableOpacity
           disabled={!selected}
           style={tw`bg-black py-3 ${!selected ? 'bg-gray-300' : ''}`}>

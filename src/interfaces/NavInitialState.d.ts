@@ -10,3 +10,14 @@ export type TSetLocation = {
   location: Point | undefined;
   description: string | undefined;
 };
+
+export type TSetTravel = {
+  distance: Time;
+  duration: Time;
+  status: string;
+};
+
+export type Time = {
+  text: string;
+  value: string;
+};

@@ -12,7 +12,7 @@ import tw from 'tailwind-react-native-classnames';
 import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {TSetOrigin} from '../interfaces/NavInitialState';
+import {TSetLocation} from '../interfaces/NavInitialState';
 import {selectOrigin} from '../redux/slices/navSlice';
 import {useAppSelector} from '../redux/store/store';
 
@@ -22,7 +22,7 @@ export type RootStackParamList = {
 
 const NavOptions: FC<TNavOptionProps> = props => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const origin: TSetOrigin = useAppSelector(selectOrigin);
+  const origin: TSetLocation = useAppSelector(selectOrigin);
 
   return (
     <FlatList

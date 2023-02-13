@@ -1,15 +1,31 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import tw from 'tailwind-react-native-classnames';
 import {useAppSelector} from '../redux/store/store';
-import {selectOrigin} from '../redux/slices/navSlice';
-import {TSetOrigin} from '../interfaces/NavInitialState';
+import {selectDestination, selectOrigin} from '../redux/slices/navSlice';
+import {TSetLocation} from '../interfaces/NavInitialState';
+import MapViewDirections from 'react-native-maps-directions';
+import {GOOGLE_MAPS_APIKEY} from '@env';
 
 const GoogleMap: FC = props => {
-  const origin: TSetOrigin = useAppSelector(selectOrigin);
+  const origin: TSetLocation = useAppSelector(selectOrigin);
+  const destionation: TSetLocation = useAppSelector(selectDestination);
+  const mapRef = useRef<MapView | null>(null);
+
+  useEffect(() => {
+    if (!origin || !destionation) return;
+
+    // Zoom & fit to markers
+    mapRef?.current?.fitToSuppliedMarkers(['origin', 'destination'], {
+      edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+    });
+  }, [origin, destionation]);
 
   return (
     <MapView
+      ref={ref => {
+        mapRef.current = ref as MapView;
+      }}
       style={tw`flex-1`}
       mapType="mutedStandard"
       initialRegion={{
@@ -18,6 +34,16 @@ const GoogleMap: FC = props => {
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
       }}>
+      {origin && destionation && (
+        <MapViewDirections
+          origin={origin?.description}
+          destination={destionation?.description}
+          apikey={GOOGLE_MAPS_APIKEY}
+          strokeWidth={3}
+          strokeColor="black"
+        />
+      )}
+
       {origin?.location && (
         <Marker
           coordinate={{
@@ -26,6 +52,18 @@ const GoogleMap: FC = props => {
           }}
           title="Origin"
           description={origin?.description}
+          identifier="origin"
+        />
+      )}
+
+      {destionation?.location && (
+        <Marker
+          coordinate={{
+            latitude: destionation?.location.lat,
+            longitude: destionation?.location.lng,
+          }}
+          title="Destination"
+          description={destionation?.description}
           identifier="origin"
         />
       )}

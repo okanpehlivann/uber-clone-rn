@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {InitialState, TSetOrigin} from '../../interfaces/NavInitialState';
+import {InitialState} from '../../interfaces/NavInitialState';
 import {navSliceReducers} from '../reducers/navSlice';
 
 const initialState: InitialState = {

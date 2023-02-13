@@ -6,7 +6,7 @@ export type InitialState = {
   travelTimeInformation: any;
 };
 
-export type TSetOrigin = {
+export type TSetLocation = {
   location: Point | undefined;
   description: string | undefined;
 };

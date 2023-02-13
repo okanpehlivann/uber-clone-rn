@@ -1,12 +1,12 @@
 import {PayloadAction} from '@reduxjs/toolkit';
-import {InitialState, TSetOrigin} from '../../interfaces/NavInitialState';
+import {InitialState, TSetLocation} from '../../interfaces/NavInitialState';
 
 export const navSliceReducers = {
-  setOrigin: (state: InitialState, action: PayloadAction<TSetOrigin>) => {
+  setOrigin: (state: InitialState, action: PayloadAction<TSetLocation>) => {
     state.origin = action.payload;
   },
 
-  setDestination(state: InitialState, action: PayloadAction<any>) {
+  setDestination(state: InitialState, action: PayloadAction<TSetLocation>) {
     state.destination = action.payload;
   },
 

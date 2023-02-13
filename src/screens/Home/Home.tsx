@@ -11,6 +11,8 @@ import {
 import {GOOGLE_MAPS_APIKEY} from '@env';
 import {useAppDispatch} from '../../redux/store/store';
 import {setOrigin} from '../../redux/slices/navSlice';
+import {TNavFavouritesData} from '../../interfaces/NavFavourites';
+import NavFavourites from '../../components/NavFavourites';
 
 export const navOptionsData: TNavOptionsData[] = [
   {
@@ -24,6 +26,21 @@ export const navOptionsData: TNavOptionsData[] = [
     title: 'Order food',
     image: 'https://links.papareact.com/28w',
     screen: 'Eats',
+  },
+];
+
+export const navFavouritesData: TNavFavouritesData[] = [
+  {
+    id: '123',
+    icon: 'home',
+    location: 'Home',
+    destination: 'Code Street, London, UK',
+  },
+  {
+    id: '456',
+    icon: 'briefcase',
+    location: 'Work',
+    destination: 'London Eye, London, UK',
   },
 ];
 
@@ -77,6 +94,7 @@ const Home: FC = props => {
         />
 
         <NavOptions navOptionsData={navOptionsData} />
+        <NavFavourites navFavouritesData={navFavouritesData} />
       </View>
     </SafeAreaView>
   );

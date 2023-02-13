@@ -11,6 +11,8 @@ import {setDestination} from '../redux/slices/navSlice';
 import {GOOGLE_MAPS_APIKEY} from '@env';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import NavFavourites from './NavFavourites';
+import {navFavouritesData} from '../screens/Home/Home';
 
 const NavigateCard = () => {
   const dispatch = useAppDispatch();
@@ -47,6 +49,8 @@ const NavigateCard = () => {
           styles={inputStyle}
         />
       </View>
+
+      <NavFavourites navFavouritesData={navFavouritesData} />
     </SafeAreaView>
   );
 };

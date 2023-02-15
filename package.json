@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.9.2",
     "@rneui/base": "^0.0.0-edge.2",
     "@rneui/themed": "^0.0.0-edge.2",
+    "formik": "^2.2.9",
     "react": "18.2.0",
     "react-native": "0.71.2",
     "react-native-dotenv": "^3.4.7",
@@ -29,7 +30,8 @@
     "react-native-screens": "^3.19.0",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",
-    "tailwind-react-native-classnames": "^1.5.1"
+    "tailwind-react-native-classnames": "^1.5.1",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -7,6 +7,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Map from './src/screens/Map/Map';
 import {KeyboardAvoidingView, Platform} from 'react-native';
+import Login from './src/screens/Login/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,12 @@ function App(): JSX.Element {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={{flex: 1}}
             keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator initialRouteName="Login">
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{headerShown: false}}
+              />
               <Stack.Screen
                 name="Home"
                 component={Home}

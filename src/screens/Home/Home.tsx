@@ -1,4 +1,4 @@
-import {Text, SafeAreaView, Image, View} from 'react-native';
+import {Text, SafeAreaView, Image, View, TouchableOpacity} from 'react-native';
 import React, {FC} from 'react';
 import tw from 'tailwind-react-native-classnames';
 import NavOptions from '../../components/NavOptions';
@@ -13,6 +13,8 @@ import {useAppDispatch} from '../../redux/store/store';
 import {setOrigin} from '../../redux/slices/navSlice';
 import {TNavFavouritesData} from '../../interfaces/NavFavourites';
 import NavFavourites from '../../components/NavFavourites';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export const navOptionsData: TNavOptionsData[] = [
   {
@@ -45,22 +47,25 @@ export const navFavouritesData: TNavFavouritesData[] = [
 ];
 
 const Home: FC = props => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const dispatch = useAppDispatch();
 
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View testID="home-view" style={tw`p-5`}>
-        <Image
-          testID="home-uber-image"
-          style={{
-            width: 100,
-            height: 100,
-            resizeMode: 'contain',
-          }}
-          source={{
-            uri: 'https://links.papareact.com/gzs',
-          }}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Image
+            testID="home-uber-image"
+            style={{
+              width: 100,
+              height: 100,
+              resizeMode: 'contain',
+            }}
+            source={{
+              uri: 'https://links.papareact.com/gzs',
+            }}
+          />
+        </TouchableOpacity>
 
         <GooglePlacesAutocomplete
           placeholder="Where From?"

@@ -49,8 +49,9 @@ const Home: FC = props => {
 
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
-      <View style={tw`p-5`}>
+      <View testID="home-view" style={tw`p-5`}>
         <Image
+          testID="home-uber-image"
           style={{
             width: 100,
             height: 100,

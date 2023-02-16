@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import {Form, Formik, FormikProps, FormikState} from 'formik';
 import * as Yup from 'yup';
-import FormikInput from '../../components/FormikInput';
+import FormikInput, {FormValues} from '../../components/FormikInput';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -27,7 +27,7 @@ export type FormikValues = {
 const Login = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: FormValues) => {
     // Handle submit logic
     console.log(values);
 
@@ -40,43 +40,39 @@ const Login = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}>
       {formikProps => (
-        <ImageBackground
-          style={{flex: 1, width: '100%', height: '100%'}}
-          resizeMode="cover"
-          source={{
-            uri: 'https://cdn.kneblesauto.com/wp-content/uploads/2021/05/rideshare.jpg',
-          }}>
-          <View style={styles.container}>
-            <FormikInput
-              label="Email"
-              formikProps={formikProps}
-              formikKey="email"
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-            <FormikInput
-              label="Password"
-              formikProps={formikProps}
-              formikKey="password"
-              secureTextEntry
-            />
-            <View style={styles.center}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  Object.keys(formikProps.errors).length > 0 ||
-                  !formikProps.values.email ||
-                  !formikProps.values.password
-                    ? styles.disabled
-                    : null,
-                ]}
-                disabled={!formikProps.isValid}
-                onPress={() => formikProps.handleSubmit(formikProps?.values)}>
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={styles.container}>
+          <FormikInput
+            label="Email"
+            formikProps={formikProps}
+            formikKey="email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            testID="email-input"
+          />
+          <FormikInput
+            label="Password"
+            formikProps={formikProps}
+            formikKey="password"
+            secureTextEntry
+            testID="password-input"
+          />
+          <View style={styles.center}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                Object.keys(formikProps.errors).length > 0 ||
+                !formikProps.values.email ||
+                !formikProps.values.password
+                  ? styles.disabled
+                  : null,
+              ]}
+              testID="login-button"
+              disabled={!formikProps.isValid}
+              onPress={() => formikProps.handleSubmit(formikProps?.values)}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
           </View>
-        </ImageBackground>
+        </View>
       )}
     </Formik>
   );

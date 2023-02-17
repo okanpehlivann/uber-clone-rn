@@ -1,12 +1,4 @@
-import {
-  expectToBeVisible,
-  isButtonDisable,
-  writeTextToInput,
-  tapButton,
-  getInputText,
-} from './detoxHelper';
-
-import {getData} from '../service';
+import {writeTextToInput} from './detoxHelper';
 
 describe('APP TEST STARTED', () => {
   beforeAll(async () => {

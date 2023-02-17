@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import React from 'react';
 import {Form, Formik, FormikProps, FormikState} from 'formik';
@@ -27,18 +28,23 @@ export type FormikValues = {
 const Login = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-  const handleSubmit = (values: FormValues) => {
-    // Handle submit logic
-    console.log(values);
+  const alertOptions = {
+    title: 'Hata',
+    message: 'Lütfen bilgileri eksiksiz ve hatasız giriniz.',
+    buttons: [{text: 'Tamam'}],
+  };
 
-    navigation.navigate('Home');
+  const showAlert = () => {
+    Alert.alert(alertOptions.title, alertOptions.message, alertOptions.buttons);
   };
 
   return (
     <Formik
       initialValues={{email: '', password: ''}}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}>
+      onSubmit={(values: FormikValues) => {
+        navigation.navigate('Home');
+      }}>
       {formikProps => (
         <View style={styles.container}>
           <FormikInput
@@ -58,17 +64,9 @@ const Login = () => {
           />
           <View style={styles.center}>
             <TouchableOpacity
-              style={[
-                styles.button,
-                Object.keys(formikProps.errors).length > 0 ||
-                !formikProps.values.email ||
-                !formikProps.values.password
-                  ? styles.disabled
-                  : null,
-              ]}
+              style={styles.button}
               testID="login-button"
-              disabled={!formikProps.isValid}
-              onPress={() => formikProps.handleSubmit(formikProps?.values)}>
+              onPress={() => formikProps.handleSubmit(formikProps.values)}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
           </View>

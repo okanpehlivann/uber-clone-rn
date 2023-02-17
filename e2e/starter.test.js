@@ -6,6 +6,8 @@ import {
   getInputText,
 } from './detoxHelper';
 
+import {getData} from '../service';
+
 describe('APP TEST STARTED', () => {
   beforeAll(async () => {
     await device.launchApp();
@@ -20,46 +22,50 @@ describe('APP TEST STARTED', () => {
       await device.reloadReactNative();
     });
 
-    it('should display email and password input fields', async () => {
-      await expectToBeVisible('email-input');
-      await expectToBeVisible('password-input');
-
-      await isButtonDisable('login-button');
+    it('should display email,password and login button fields', async () => {
+      await expect(element(by.id('email-input'))).toBeVisible();
+      await expect(element(by.id('password-input'))).toBeVisible();
+      await expect(element(by.id('login-button'))).toBeVisible();
     });
 
-    it('should login button disabled when email and password are not entered', async () => {
-      const emailValue = getInputText('email-input');
-      const passwordValue = getInputText('password-input');
+    it('should display error when email and password are not entered', async () => {
+      await element(by.id('login-button')).tap();
 
-      if (!emailValue || !passwordValue) {
-        await isButtonDisable('login-button');
-      }
+      await expect(
+        element(by.id('input-error').and(by.text('Email is required'))),
+      ).toBeVisible();
+
+      await expect(
+        element(by.id('input-error').and(by.text('Password is required'))),
+      ).toBeVisible();
     });
 
     it('should login button disabled when invalid email is entered', async () => {
       await writeTextToInput('email-input', 'invalid-email');
       await writeTextToInput('password-input', 'valid_password');
 
-      await isButtonDisable('login-button');
+      await element(by.id('login-button')).tap();
+      await expect(element(by.id('input-error'))).toBeVisible();
     });
 
-    it('should login button disabled when invalid password is entered', async () => {
+    it('should display error when invalid password is entered', async () => {
       await writeTextToInput('email-input', 'valid_email@example.com');
       await writeTextToInput('password-input', 'v');
 
-      await isButtonDisable('login-button');
+      await element(by.id('login-button')).tap();
+      await expect(element(by.id('input-error'))).toBeVisible();
     });
-  });
 
-  describe('Home Screen TESTS', () => {
-    it('should navigate to home screen when valid email and password are entered', async () => {
+    it('should navigate to Home Page when valid password and email', async () => {
       await writeTextToInput('email-input', 'valid_email@example.com');
       await writeTextToInput('password-input', 'valid_password');
 
-      await tapButton('login-button');
+      await element(by.id('login-button')).tap();
+      await expect(element(by.id('home-view'))).toBeVisible();
 
-      await expectToBeVisible('home-view');
-      await expectToBeVisible('home-uber-image');
+      await waitFor(element(by.id('last-view')))
+        .toExist()
+        .withTimeout(2000);
     });
   });
 });

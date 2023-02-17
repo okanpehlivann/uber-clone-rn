@@ -33,9 +33,7 @@ const FormikInput = ({
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.label}>
-        {label} {testID}{' '}
-      </Text>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
         style={inputStyle}
         onChangeText={formikProps.handleChange(formikKey)}

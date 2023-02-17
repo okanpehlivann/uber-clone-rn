@@ -1,5 +1,5 @@
 import {Text, SafeAreaView, Image, View, TouchableOpacity} from 'react-native';
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import tw from 'tailwind-react-native-classnames';
 import NavOptions from '../../components/NavOptions';
 import {TNavOptionsData} from '../../interfaces/NavOptionsData';
@@ -11,10 +11,10 @@ import {
 import {GOOGLE_MAPS_APIKEY} from '@env';
 import {useAppDispatch} from '../../redux/store/store';
 import {setOrigin} from '../../redux/slices/navSlice';
-import {TNavFavouritesData} from '../../interfaces/NavFavourites';
 import NavFavourites from '../../components/NavFavourites';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {getData} from '../../../service';
 
 export const navOptionsData: TNavOptionsData[] = [
   {
@@ -31,31 +31,25 @@ export const navOptionsData: TNavOptionsData[] = [
   },
 ];
 
-export const navFavouritesData: TNavFavouritesData[] = [
-  {
-    id: '123',
-    icon: 'home',
-    location: 'Home',
-    destination: 'Code Street, London, UK',
-  },
-  {
-    id: '456',
-    icon: 'briefcase',
-    location: 'Work',
-    destination: 'London Eye, London, UK',
-  },
-];
-
 const Home: FC = props => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const dispatch = useAppDispatch();
+  const [navFavouritesData, setNavFavouritesData] = useState<any>();
+
+  useEffect(() => {
+    getFavourities();
+  }, []);
+
+  const getFavourities = async () => {
+    const data = await getData();
+    setNavFavouritesData(data);
+  };
 
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View testID="home-view" style={tw`p-5`}>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Image
-            testID="home-uber-image"
             style={{
               width: 100,
               height: 100,
@@ -100,7 +94,10 @@ const Home: FC = props => {
         />
 
         <NavOptions navOptionsData={navOptionsData} />
-        <NavFavourites navFavouritesData={navFavouritesData} />
+        <NavFavourites
+          testID="last-view"
+          navFavouritesData={navFavouritesData}
+        />
       </View>
     </SafeAreaView>
   );

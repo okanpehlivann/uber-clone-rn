@@ -1,0 +1,130 @@
+{
+  "navFavouritesData": [
+    {
+      "id": "1",
+      "icon": "home",
+      "location": "Home",
+      "destination": "Code Street, London, UK"
+    },
+    {
+      "id": "2",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+
+    {
+      "id": "3",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+
+    {
+      "id": "4",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+
+    {
+      "id": "5",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+
+    {
+      "id": "6",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+
+    {
+      "id": "7",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+
+    {
+      "id": "8",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "9",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "10",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "11",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "12",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "13",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "14",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "15",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "16",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "17",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "18",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "19",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    },
+    {
+      "id": "20",
+      "icon": "briefcase",
+      "location": "Work",
+      "destination": "London Eye, London, UK"
+    }
+  ]
+}

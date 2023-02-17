@@ -1,5 +1,6 @@
 export type TNavFavouritesProps = {
   navFavouritesData: TNavFavouritesData[];
+  testID: string;
 };
 
 export type TNavFavouritesData = {

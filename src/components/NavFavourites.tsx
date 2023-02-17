@@ -16,6 +16,7 @@ import tw from 'tailwind-react-native-classnames';
 const NavFavourites: FC<TNavFavouritesProps> = props => {
   return (
     <FlatList
+      testID={props.secondTestID}
       style={{height: '40%'}}
       data={props?.navFavouritesData}
       keyExtractor={(item: TNavFavouritesData) => item.id}

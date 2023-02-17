@@ -10,10 +10,6 @@ describe('APP TEST STARTED', () => {
   });
 
   describe('Login Screen TESTS', () => {
-    beforeEach(async () => {
-      await device.reloadReactNative();
-    });
-
     it('should display email,password and login button fields', async () => {
       await expect(element(by.id('email-input'))).toBeVisible();
       await expect(element(by.id('password-input'))).toBeVisible();
@@ -58,6 +54,14 @@ describe('APP TEST STARTED', () => {
       await waitFor(element(by.id('last-view')))
         .toExist()
         .withTimeout(2000);
+
+      await waitFor(element(by.id('flat-list')))
+        .toExist()
+        .withTimeout(5000);
+
+      await element(by.id('flat-list')).swipe('up', 'fast', 0.9);
+
+      await element(by.id('flat-list')).swipe('down', 'fast', 1);
     });
   });
 });

@@ -96,6 +96,7 @@ const Home: FC = props => {
         <NavOptions navOptionsData={navOptionsData} />
         <NavFavourites
           testID="last-view"
+          secondTestID="flat-list"
           navFavouritesData={navFavouritesData}
         />
       </View>

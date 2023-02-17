@@ -9,8 +9,8 @@
     "start": "react-native start",
     "test": "jest",
     "serve-json": "json-server --watch db.json --port 4000",
-    "detox-ios-build": "detox build --configuration ios.sim.debug",
-    "detox-ios-test": "detox test --configuration ios.sim.debug"
+    "detox-build": "detox build --configuration ios.sim.debug",
+    "detox-test": "detox test --configuration ios.sim.debug"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.3",

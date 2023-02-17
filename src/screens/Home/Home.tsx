@@ -1,4 +1,11 @@
-import {Text, SafeAreaView, Image, View, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  SafeAreaView,
+  Image,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import React, {FC, useEffect, useState} from 'react';
 import tw from 'tailwind-react-native-classnames';
 import NavOptions from '../../components/NavOptions';
@@ -35,6 +42,7 @@ const Home: FC = props => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const dispatch = useAppDispatch();
   const [navFavouritesData, setNavFavouritesData] = useState<any>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getFavourities();
@@ -42,7 +50,12 @@ const Home: FC = props => {
 
   const getFavourities = async () => {
     const data = await getData();
-    setNavFavouritesData(data);
+    if (data) {
+      setNavFavouritesData(data);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+    }
   };
 
   return (
@@ -92,13 +105,33 @@ const Home: FC = props => {
             },
           }}
         />
-
         <NavOptions navOptionsData={navOptionsData} />
-        <NavFavourites
-          testID="last-view"
-          secondTestID="flat-list"
-          navFavouritesData={navFavouritesData}
-        />
+
+        {isLoading === true ? (
+          <>
+            <View
+              testID="spinner"
+              style={{
+                backgroundColor: '#FFFFFF',
+                height: 100,
+                width: 100,
+                borderRadius: 10,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+              }}>
+              <ActivityIndicator animating={isLoading} color="black" />
+            </View>
+          </>
+        ) : (
+          <>
+            <NavFavourites
+              testID="last-view"
+              secondTestID="flat-list"
+              navFavouritesData={navFavouritesData}
+            />
+          </>
+        )}
       </View>
     </SafeAreaView>
   );

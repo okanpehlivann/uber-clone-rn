@@ -51,16 +51,16 @@ describe('APP TEST STARTED', () => {
       await element(by.id('login-button')).tap();
       await expect(element(by.id('home-view'))).toBeVisible();
 
-      await waitFor(element(by.id('last-view')))
-        .toExist()
-        .withTimeout(2000);
+      // Burada verilen süre maksimum süredir.
+      // 10 saniye içerisinde servis yanıt verip bu spinner'ın kapanması beklenir.
+      await waitFor(element(by.id('spinner')))
+        .not.toExist()
+        .withTimeout(10000);
 
-      await waitFor(element(by.id('flat-list')))
-        .toExist()
-        .withTimeout(5000);
+      // Spinner servis yanıt verdikten sonra kapanacağı için aşağıdaki kodların hatasız gerçekleştirilmesi beklenmektedir.
+      await expect(element(by.id('flat-list'))).toBeVisible();
 
       await element(by.id('flat-list')).swipe('up', 'fast', 0.9);
-
       await element(by.id('flat-list')).swipe('down', 'fast', 1);
     });
   });

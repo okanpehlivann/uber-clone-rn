@@ -22,6 +22,7 @@ import NavFavourites from '../../components/NavFavourites';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {getData} from '../../../service';
+import {Icon} from 'react-native-elements';
 
 export const navOptionsData: TNavOptionsData[] = [
   {

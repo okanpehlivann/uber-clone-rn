@@ -9,10 +9,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Map from './src/screens/Map/Map';
 import {KeyboardAvoidingView, Platform} from 'react-native';
 import Login from './src/screens/Login/Login';
-import {Icon} from 'react-native-elements';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const MapStack = () => {
   return (
@@ -54,15 +55,8 @@ function App(): JSX.Element {
             keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}>
             <Stack.Navigator>
               <Stack.Screen
-                name="Home"
-                component={HomeTabs}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Map"
-                component={Map}
+                name="Logibn"
+                component={Login}
                 options={{
                   headerShown: false,
                 }}
